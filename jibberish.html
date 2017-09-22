@@ -3,89 +3,130 @@
 <head>
 	<title>Jibberish</title>
 	<meta charset="utf-8" />
-	<script type="text/javascript">
-	const init = "(($,_,$$=+_,__)=>($.$=!''+_,$._=!_+_,$.$$=_[_]+_,$.$_=$+_,$._$=-~_/_+_,$.__=$.$_[-~-~-~-~-~_]+$.$_[++$$]+$.$$[$$++]+$._[++$$]+$.$[+_]+$.$[-~_]+$.$$[+_]+$.$_[-~++$$]+$.$[+_]+$.$_[-~_]+$.$[-~_],$.$$_=(+_)[$.__]+_,$.$_$=''[$.__]+_,$.$__=/./[$.__]+_,__=(_=>_)[$.__],$._$_=$.$[-~_]+$._[$$++]+$.$[+_]+$.$[-~-~_]+$.$[-~_]+$.$$[-~_],$.__$=__($._$_+' '+$.__[+_]+$.$[-~_]+$._$[-~++$$]+$.$__[++$$+$$]+$.$[+_]+$.$_[-~_])()+_,$['']=__('_',$._$_+' _.'+$.$[+_]+$.$_[-~_]+$.$_$[$._[-~-~-~_]+$._[-~-~_]+$._$[-~-~-~_]+$.__[+_]+$._$_[-~_]](-~-~$$,-~$$+$$)+'('+--$$*$$+')'),$.___=(...$_)=>''[$.__][$._[+_]+$.$[-~_]+$.$_[-~_]+$.$$_[~-$$+$$++]+$.__$[++$$]+$['']($$-~$$)+$._[-~_]+$.$[-~_]+$.__$[$$]+$.$_[-~_]+$.$$[-~-~_]+$._$_[-~_]][$[''](~(_=>-_-++_+''+_+_+_*_*~-(_*--_))($$))](_,$_),$.___(",
-	end = ")))({},[]);",
-	table = [
-		"+''",
-		"+!''",
-		"-~!''",
-		"-~-~!''",
-		"-~-~-~!''",
-		"-~-~-~-~!''",
-		"-~-~!''<<!''",
-		"~(~''<<-~-~!'')",
-		"!''<<-~-~!''",
-		"~(~''+''+-'')",
-		"-(~''+''+-'')",
-		"-(~''+''+-~'')",
-		"-~-~!''<<-~!''",
-		"-~-~!''<<-~!''|!''",
-		"~-~(~''<<-~-~-~!'')",
-		"~(~''<<-~-~-~!'')",
-		"!''<<-~-~-~!''",
-		"!''<<-~-~-~!''|!''",
-		"~-~(~!''+''+-'')",
-		"~(~!''+''+-'')",
-		"-(~!''+''+-'')",
-		"-(~!''+''+-~'')",
-		"-(~!''+''+-~!'')",
-		"~(~-~!''<<-~-~!'')",
-		"-~-~!''<<-~-~!''",
-		"[~-~-~-~!'']**-~!''",
-		"~(_=>_**-_)(~-~!'')",
-		"[-~-~!'']**-~-~!''",
-		"~-~(~-~!''+''+-'')",
-		"~(~-~!''+''+-'')",
-		"-(~-~!''+''+-'')",
-		"-(~-~!''+''+-~'')",
-		"!''<<-~-~-~-~!''",
-	], encode = str => {
+</head>
+<body>
+	<p>Jibberish - convert text or script into JavaScript gibberish. &nbsp; &nbsp;
+		Copyright &copy;<a href="http://github.com/CharCoding/Jibberish" title="Github repository">CharCoding</a>, 2017</p>
+	<textarea id="original" rows="16" cols="64" placeholder="input text/script" autofocus="true"></textarea>
+	<textarea id="jibberish" rows="16" cols="64" placeholder="jibberish script" readonly="true" autocomplete="off"></textarea><br />
+	<input type="checkbox" id="evalScript" autocomplete="off" /><label for="evalScript">Eval() input as script</label> &nbsp; &nbsp;
+	Length of Jibberish: <input type="number" id="scriptLength" readonly="true" step="1" min="0" /> bytes. &nbsp; &nbsp;
+	<input type="button" value="eval() jibberish as text" id="runScript" />
+	<input type="button" value="debug" id="debugScript" />
+	<script type="text/javascript">// Jibberish character set (20 characters): ()[]{}<=>'.,+-*~!_$/
+	"use strict";
+	const init = "(($,_,$$=+_,__)=>($.$=!_+_,$._=![]+_,$.$$=_[_]+_,$.$_=$+_,$._$=!_/_+_,$.__=$.$_[-~-~-~-~!_]+$.$_[++$$]+$.$$[$$++]+$._[++$$]+$.$[+_]+$.$[-~_]+$.$$[+_]+$.$_[-~++$$]+$.$[+_]+$.$_[-~_]+$.$[-~_],$.$$_=(+_)[$.__]+_,$.$_$=_[$.__]+_,$.$__=/./[$.__]+_,__=(_=>_)[$.__],$._$_=$.$[-~_]+$._[$$++]+$.$[+_]+$.$[-~!_]+$.$[-~_]+$.$$[-~_],$.__$=__($._$_+' '+$.__[+_]+$.$[-~_]+$._$[-~++$$]+$.$__[++$$+$$]+$.$[+_]+$.$_[-~_])()+_,$[_]=__('_',$._$_+' _.'+$.$[+_]+$.$_[-~_]+$.$_$[$._[-~-~!_]+$._[-~!_]+$._$[-~-~!_]+$.__[+_]+$._$_[-~_]](-~-~$$,-~$$+$$)+'('+--$$*$$+')'),$.___=(...$_)=>_[$.__][$._[+_]+$.$[-~_]+$.$_[-~_]+$.$$_[~-$$+$$++]+$.__$[++$$]+$[_]($$-~$$)+$._[-~_]+$.$[-~_]+$.__$[$$]+$.$_[-~_]+$.$$[-~!_]+$._$_[-~_]][$[_](~($=>-$-++$+_+$+$+$*$*~-($*--$))($$))](_,$_),$.___(",
+	initEval = "(($,_,$$=+_,__)=>($.$=!_+_,$._=![]+_,$.$$=_[_]+_,$.$_=$+_,$._$=!_/_+_,$.__=$.$_[-~-~-~-~!_]+$.$_[++$$]+$.$$[$$++]+$._[++$$]+$.$[+_]+$.$[-~_]+$.$$[+_]+$.$_[-~++$$]+$.$[+_]+$.$_[-~_]+$.$[-~_],$.$$_=(+_)[$.__]+_,$.$_$=_[$.__]+_,$.$__=/./[$.__]+_,__=(_=>_)[$.__],$._$_=$.$[-~_]+$._[$$++]+$.$[+_]+$.$[-~!_]+$.$[-~_]+$.$$[-~_],$.__$=__($._$_+' '+$.__[+_]+$.$[-~_]+$._$[-~++$$]+$.$__[++$$+$$]+$.$[+_]+$.$_[-~_])()+_,$[_]=__('_',$._$_+' _.'+$.$[+_]+$.$_[-~_]+$.$_$[$._[-~-~!_]+$._[-~!_]+$._$[-~-~!_]+$.__[+_]+$._$_[-~_]](-~-~$$,-~$$+$$)+'('+--$$*$$+')'),$.___=(...$_)=>_[$.__][$._[+_]+$.$[-~_]+$.$_[-~_]+$.$$_[~-$$+$$++]+$.__$[++$$]+$[_]($$-~$$)+$._[-~_]+$.$[-~_]+$.__$[$$]+$.$_[-~_]+$.$$[-~!_]+$._$_[-~_]][$[_](~($=>-$-++$+_+$+$+$*$*~-($*--$))($$))](_,$_),$.$$$=__('_',$._$_+' '+$._$_[-~_]+$.$$_[$$*$$+~$$]+$._[-~_]+$._[-~!_]+'(_)'),$.$$$($.___(",
+	end = ")))({},'')",
+	testStr = ' !"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~ ¡¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ',
+	table = [ // $$ = 6, _ = ''
+		"+_",
+		"+!_",
+		"-~!_",
+		"-~-~!_",
+		"~-~-$$",
+		"~-$$",
+		"$$",
+		"-~$$",
+		"-~-~$$",
+		"-~-~-~$$",
+		"~-$$<<!_",
+		"~-$$+$$",
+		"$$+$$",
+		"$$-~$$",
+		"-~$$-~$$",
+		"-~-~$$-~$$",
+		"!_<<~-~-$$",
+		"~-$$+$$+$$",
+		"$$+$$+$$",
+		"$$+$$-~$$",
+		"$$-~$$-~$$",
+		"~$$*$$/~!_",
+		"~-$$+$$<<!_",
+		"~(-$$<<-~!_)",
+		"$$<<-~!_",
+		"~-$$*~-$$",
+		"$$-~$$<<!_",
+		"-(~!_+_+-~$$)",
+		"-~$$<<-~!_",
+		"$$*$$+~$$",
+		"$$*$$-$$",
+		"$$*$$-~-$$",
+		"!_<<~-$$",
+		"$$+_+$$>>!_",
+		"$$*$$+~!_",
+		"$$*$$-!_",
+		"$$*$$",
+		"-~($$*$$)",
+		"-~-~($$*$$)",
+		"$$*$$-$$/~!_",
+		"~-$$<<-~-~!_",
+		"~($$*~$$)",
+		"$$*-~$$",
+		"~$$*~$$-$$",
+		"~$$*~$$-~-$$",
+		"~-$$*-~-~-~$$",
+		"~-~($$*~-~$$)",
+		"~($$*~-~$$)",
+		"$$*-~-~$$",
+		"~$$*~$$",
+		"~$$*~$$-~_",
+		"~$$*~$$-~!_",
+		"$$-~$$<<-~!_",
+		"~($$*~-~-~$$)",
+		"$$*-~-~-~$$",
+		"~$$*~$$+$$",
+		"~$$*~-~$$",
+		"~$$*~-~$$-~_",
+		"~-~(-$$+_+-_)",
+		"~(-$$+_+-_)",
+		"+($$+_+-_)",
+		"+($$+_+-~_)",
+		"~-~(~_<<$$)",
+		"~(~_<<$$)",
+		"!_<<$$"
+	],
+	encode = str => {
 		let n = [];
 		for(let i = str.length; i--;){
 			let c = str.charCodeAt(i);
-			if(table[c]) n.unshift(table[c]);
-			else if(c < 64) n.unshift('(' + table[32] + ')+(' + table[c & 31] + ')');
-			else if(c < 1056) n.unshift('(' + table[c >>> 5] + ")<<-~-~-~-~!''|" + table[c & 31]);
-			else if(c < 33792) n.unshift('(' + table[c >>> 10] + ")<<-(~''+''+-'')|(" + table[c >>> 5 & 31] + ")<<-~-~-~-~!''|" + table[c & 31]);
-			// Uhh partial unicode support?
+			if(c < 65) n.unshift(table[c]);
+			else if(c < 129) n.unshift('!_<<$$|' + table[c - 64]);
+			else if(c < 4096) n.unshift(`(${table[c >>> 6 & 63]})<<$$|(${table[c & 63]})`);
+			else n.unshift(`(${table[c >>> 12]})<<$$+$$|(${table[c >>> 6 & 63]})<<$$|(${table[c & 63]})`);
+			// support up to codepoint 266239
 		}
-		// if(evalScript.checked) return initEval + n.join() + endEval; // TODO: eval script
+		if(evalScript.checked) return initEval + n.join() + ')' + end;
 		return init + n.join() + end;
 	};
-	</script>
-</head>
-<body>
-	<p>Jibberish - convert text <del>or script</del> into JavaScript gibberish. &nbsp; &nbsp;
-		Copyright &copy;<a href="http://github.com/CharCoding">CharCoding</a>, 2017</p>
-	<textarea id="original" rows="15" cols="60" placeholder="input text/script"></textarea>
-	<textarea id="jibberish" rows="15" cols="60" placeholder="jibberish script"></textarea><br />
-	<input type="checkbox" id="evalScript" disabled="true" /><label for="evalScript"><del>Eval() input</del></label> &nbsp; &nbsp;
-	Length of Jibberish: <input type="number" id="scriptLength" readonly="true" step="1" min="0" /> bytes. &nbsp; &nbsp;
-	<input type="button" value="eval() jibberish as text" id="runScript" />
-	<script type="text/javascript">
 	let timer = 0, converted = false;
 	original.addEventListener('keyup',function(e){
 		converted = false;
 		clearTimeout(timer);
 		timer = setTimeout(function(){
-			jibberish.value = encode(original.value);
-			scriptLength.value = jibberish.value.length;
+			scriptLength.value = (jibberish.value = encode(original.value)).length;
 			converted = true;
 		}, 1500);
 	});
 	evalScript.addEventListener('change',function(e){
-		return alert("Feature not implemented yet!");
-		if(this.checked) runScript.value = 'eval() jibberish as script';
-		else runScript.value = 'eval() jibberish as text';
-	})
+		scriptLength.value = (jibberish.value = encode(original.value)).length;
+		converted = true;
+		if(this.checked) runScript.value = 'evaluate jibberish as script (Be careful!)';
+		else runScript.value = 'alert jibberish as text';
+	});
 	runScript.addEventListener('click',function(e){
 		if(!converted) {
 			jibberish.value = encode(original.value);
 			converted = true;
 		}
-		try { alert(eval(jibberish.value)); }
-		catch(e) { alert("Something went wrong! " + e); }
+		try {
+			if(evalScript.checked) eval(jibberish.value); // danger: jibberish.value already eval() once, this will run an actual script.
+			else alert(eval(jibberish.value)); // this should be ok as jibberish.value returns a string.
+		}
+		catch(e) { alert("Something went wrong!\n" + e); }
+	});
+	debugScript.addEventListener('click',function(e){
+		alert(testStr === eval(encode(testStr)));
 	});
 	</script>
 </body>
