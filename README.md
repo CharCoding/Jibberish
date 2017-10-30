@@ -3,7 +3,7 @@ Convert text or script into JavaScript gibberish
 
 This is a JavaScript obfuscation program, inspired by [JSF*ck](http://jsfuck.com/) and [Hieroglyphy](http://patriciopalladino.com/files/hieroglyphy/).
 
-It uses a bigger set of characters (20 chars), but it get the stuff done a lot quicker.
+It uses a bigger set of characters (21 chars), but it get the stuff done a lot quicker.
 ## How it works:
 ```(($,_,$$=+_,__)=>( ... ))({},'')```
 
@@ -30,9 +30,9 @@ The last one is quite important, as it's equivalent to ```eval()```.
 
 ```$._$_=$.$[-~_]+$._[$$++]+$.$[+_]+$.$[-~!_]+$.$[-~_]+$.$$[-~_]``` spells 'return'.
 
-And a bunch of stuff follows it to construct a ```toString()``` function that returns the letter ```'h'``` (yes, all for that one ```'h'```).
+And a bunch of stuff follows it to construct a ```toString()``` function that returns the letter ```'h'``` (yes, all for that one 'h').
 
-Later, it uses the ```'crypto'``` keyword to get the string ```'[object Crypto]'```, which contain the letter 'C'.
+Later, it uses the ```crypto``` keyword to get the string ```'[object Crypto]'```, which contain the letter 'C'.
 
 Basically, the whole program first generates this function:
 
