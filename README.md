@@ -1,6 +1,8 @@
 # Jibberish
 Convert text or script into JavaScript gibberish
 
+Disclaimer: it doesn't work with Chrome! Try Firefox instead.
+
 This is a JavaScript obfuscation program, inspired by [JSF*ck](http://jsfuck.com/) and [Hieroglyphy](http://patriciopalladino.com/files/hieroglyphy/).
 
 It uses a bigger set of characters (21 chars), but it get the stuff done a lot quicker.
