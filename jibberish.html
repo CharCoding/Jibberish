@@ -91,7 +91,8 @@
 		for(let i = str.length; i--;){
 			let c = str.charCodeAt(i);
 			if(c < 65) n.unshift(table[c]);
-			else if(c < 129) n.unshift('!_<<$$|' + table[c - 64]);
+			else if(c < 128) n.unshift('!_<<$$|' + table[c - 64]);
+			else if(c == 128) n.unshift('!_<<-~$$');
 			else if(c < 4096) n.unshift(`(${table[c >>> 6 & 63]})<<$$|(${table[c & 63]})`);
 			else n.unshift(`(${table[c >>> 12]})<<$$+$$|(${table[c >>> 6 & 63]})<<$$|(${table[c & 63]})`);
 			// support up to codepoint 266239
